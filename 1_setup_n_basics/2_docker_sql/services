@@ -1,0 +1,23 @@
+services:
+    postgres:
+        image: postgres:13
+        enviroment:
+            POSTGRES_USER: airflow
+            POSTGRES_PASSWORD: airflow
+            POSTGRES_DB: airflow
+        volumes:
+            - postgres-db-volume:/var/lib/postgressql/data  # mapping a folder on our host machine to postgres to be able to save / read records, as docker state is lost when restarting
+        healthcheck:
+            test: ["CMD", "pg_isready", "-U", "airflow"]
+            interval: 5s
+            retries: 5
+        restart: always
+
+docker run -it \
+    -e POSTGRES_USER="root" \
+    -e POSTGRES_PASSWORD="root" \
+    -e POSTGRES_DB="ny_taxi" \
+    -v "c:\Users\DRE\Data-Engineering\1_setup_n_basics/ny_taxi_postgres_data:/var/lib/postgresql/data"S \
+    -p 5432:5432 \
+   postgres:13 
+
