@@ -66,3 +66,30 @@ First, install dlt using pip:
 ```bash
 pip install dlt
 
+## Hands-On with dlt
+
+Let's walk through building a data ingestion pipeline using dlt.
+
+### 2. Extracting Data from an API
+
+We'll extract data from a RESTful API. Here's how:
+
+```python
+import dlt
+import requests
+
+# Define the API endpoint
+api_url = 'https://api.example.com/data'
+
+# Create a dlt pipeline
+pipeline = dlt.pipeline(destination='your_destination', dataset_name='your_dataset')
+
+# Define a function to extract data
+@dlt.resource
+def extract_data():
+    response = requests.get(api_url)
+    response.raise_for_status()
+    return response.json()
+
+# Run the pipeline with the extract function
+pipeline.run(extract_data)
