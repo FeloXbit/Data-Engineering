@@ -29,7 +29,8 @@ Question 2: Define & Run the Pipeline
 The pipeline is implemented using `dlt.resource` for data extraction and `RESTClient` for pagination.
 
 ### Define API Source & Pagination
-```import dlt
+```python
+import dlt
 from dlt.sources.helpers.rest_client import RESTClient
 from dlt.sources.helpers.rest_client.paginators import PageNumberPaginator
 
@@ -62,7 +63,8 @@ print(load_info)
 
 ##  Explore the Data
 ### Connect to DuckDB and Inspect Tables
-```#Start a connection to your database using native duckdb connection and look what tables were generated
+```python
+#Start a connection to your database using native duckdb connection and look what tables were generated
 import duckdb
 from google.colab import data_table
 data_table.enable_dataframe_formatter()
@@ -80,7 +82,8 @@ conn.sql("DESCRIBE").df()
 ```
 
 ### Question 3: Explore the loaded data
-```#Inspect the table rides
+```python
+#Inspect the table rides
 df = pipeline.dataset(dataset_type="default").rides.df()
 df
 ```
